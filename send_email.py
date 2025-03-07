@@ -36,9 +36,9 @@ def capture_image():
 
 def SendEmail():
     """Gửi email cảnh báo và đính kèm ảnh."""
-    sender_email = "vhau1010@gmail.com"
-    sender_password = "uyinfhebgajavqab"
-    Receiver_Email = "dminhphuong97@gmail.com"
+    sender_email = "khuong1052k25@gmail.com"
+    sender_password = "twwutysomskshvws"
+    Receiver_Email = "nguyenkhuong1052003@gmail.com"
 
     # Tạo nội dung email
     newMessage = EmailMessage()
@@ -61,9 +61,9 @@ def SendEmail():
 
 def SendEmail1(path):
     """Gửi email cảnh báo và đính kèm ảnh."""
-    sender_email = "vhau1010@gmail.com"
-    sender_password = "uyinfhebgajavqab"
-    Receiver_Email = "dminhphuong97@gmail.com"
+    sender_email = "khuong1052k25@gmail.com"
+    sender_password = "twwutysomskshvws"
+    Receiver_Email = "nguyenkhuong1052003@gmail.com"
 
     # Tạo nội dung email
     newMessage = EmailMessage()
