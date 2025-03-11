@@ -134,7 +134,7 @@ class LockSystemApp:
         """Thoát chương trình một cách an toàn."""
         if messagebox.askyesno("Xác nhận thoát", "Bạn có chắc chắn muốn thoát?"):
             cleanup()  # Dọn dẹp GPIO
-            self.master.quit()  # Thoát vòng lặp chính
+            self.master.quit()  # Thoát vònglặp chính
             self.master.destroy()  # Đóng cửa sổ Tkinter
             sys.exit()  # Thoát hệ thống
 
