@@ -55,6 +55,7 @@ def save_unknown_face(frame):
     count = 0
     filename = os.path.join(warning_folder, f"{base_filename}.jpg")
 
+
     # Kiểm tra xem tệp đã tồn tại chưa và thay đổi tên nếu cần
     while os.path.exists(filename):
         count += 1
@@ -139,6 +140,12 @@ def unlock_with_face(data):
                 activate_correct_alarm()  # Kích hoạt báo thức đúng
                 threading.Timer(3.0, deactivate_alarm).start()  # Kích hoạt báo thức sau 3 giây
                 last_recognition_time = time.time()  # Cập nhật thời gian nhận diện
+                
+                # Cleanup and close camera
+                vs.stop()
+                cv2.destroyAllWindows()
+                return True  # Return True on successful recognition    
+                    
 
         # Khóa cửa sau khoảng thời gian nhận diện lại
         if get_door_status() == False:  # Kiểm tra trạng thái cửa

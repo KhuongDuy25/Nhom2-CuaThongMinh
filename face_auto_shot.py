@@ -4,6 +4,7 @@ import time
 import dlib
 from display import DisplayScreen
 from train_model import train_face_recognition
+import tkinter as tk
 
 def capture_and_train(username):
     """
@@ -24,22 +25,50 @@ def capture_and_train(username):
     # Tìm số lượng ảnh đã lưu
     existing_images = len([name for name in os.listdir(dataset_dir) if name.endswith('.jpg')])
     img_counter = existing_images  # Đếm số ảnh đã có
-    display.add_message("Ấn space để bắt đầu chụp ảnh")  # Hiển thị thông báo yêu cầu bắt đầu chụp ảnh
+    display.add_message("Chương trình đăng kí khuôn mặt")
+    display.add_message("Vui lòng hướng khuôn mặt vào camera")# Hiển thị thông báo yêu cầu bắt đầu chụp ảnh
 
     # Khởi tạo camera
     cam = cv2.VideoCapture(0)
 
     # Khởi tạo dlib face detector
-    detector = dlib.get_frontal_face_detector()
+    detector = dlib.get_frontal_face_detector() # Bộ phát hiện khuôn mặt
 
     # Tạo cửa sổ để hiển thị quá trình chụp ảnh
     cv2.namedWindow("Capturing Photos...", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Capturing Photos...", 500, 300)
 
-    num_photos = 100  # Số lượng ảnh cần chụp
+    num_photos = 50  # Số lượng ảnh cần chụp
     capture_delay = 0.1  # Delay giữa các lần chụp ảnh
 
-    print(f"Press SPACE to start capturing {num_photos} photos... or ESC to exit.")
+   # print(f"Press SPACE to start capturing {num_photos} photos... or ESC to exit.")
+       # Thay thế print bằng widget thông báo
+    capture_window = tk.Toplevel()
+    capture_window.title("Chụp ảnh đăng ký")
+    capture_window.geometry("500x300")
+    
+    # Label hướng dẫn
+    tk.Label(
+        capture_window,
+        # text=f"Chuẩn bị chụp {num_photos} ảnh cho {username}",
+        text=f"Vui lòng ấn nút đăng kí khuôn măt.",
+        font=("Arial", 12)
+    ).pack(pady=10)
+    
+    def start_capturing():
+        nonlocal is_capturing
+        is_capturing = True
+        capture_window.destroy()
+    
+    # Nút bắt đầu chụp
+    tk.Button(
+        capture_window,
+        text="Bắt đầu chụp",
+        command=start_capturing,
+        width=20,
+        height=2,
+        font=("Arial", 10, "bold")
+    ).pack(pady=20)
 
     # Biến để điều khiển trạng thái chụp ảnh
     is_capturing = False
