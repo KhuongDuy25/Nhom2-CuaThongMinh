@@ -66,12 +66,12 @@ python main.py
 - train/: Thư mục chứa các file và dữ liệu đã được huấn luyện nhận dạng 
 - Warning/: Thư mục này lưu trữ các file ảnh của những người lạ cố gắng đột nhập vào nhà .
 # 2. Các file Python chính
-•	admin.py: Chứa các hàm dành cho quản trị viên,  bao gồm các chức năng, đăng ký thêm người mới vào hệ thống,.
-•	display.py: Chứa các hàm để hiển thị thông báo hoặc giao diện người dùng thông qua giao diện đồ họa như pygame (mô phỏng led lcd)
-•	chupanh.py: Chứa logic để tự động chụp ảnh khuôn mặt, sử dụng camera để thu thập dữ liệu khuôn mặt phục vụ cho nhận diện.
-•	nhandienkhuonmat.py: Chứa logic chính để thực hiện nhận diện khuôn mặt, sử dụng các thư viện như OpenCV và dlib để so sánh và xác thực khuôn mặt.
-•	gpio_setup.py: Chứa các hàm thiết lập GPIO trên Raspberry Pi, bao gồm định nghĩa các chân GPIO, bật/tắt relay, nút bấm, LED, còi báo, v.v.
-•	main.py: Tệp chính điều khiển chương trình. Đây là tệp khởi động, quản lý luồng công việc chính của hệ thống, và điều khiển toàn bộ quá trình.
-•	mokhoapass.py: Chứa logic để mở khóa cửa dựa trên mật khẩu, bao gồm việc nhập và kiểm tra mật khẩu của người dùng.
-•	send_email.py: Chứa hàm gửi email, sử dụng để gửi thông báo tới quản trị viên khi có sự cố hoặc yêu cầu mở khóa.
-•	train_model.py: Chứa logic để huấn luyện mô hình nhận diện khuôn mặt dựa trên dữ liệu hình ảnh thu thập được từ thư mục dataset/.
+-	admin.py: Chứa các hàm dành cho quản trị viên,  bao gồm các chức năng, đăng ký thêm người mới vào hệ thống,.
+-	display.py: Chứa các hàm để hiển thị thông báo hoặc giao diện người dùng thông qua giao diện đồ họa như pygame (mô phỏng led lcd)
+-	chupanh.py: Chứa logic để tự động chụp ảnh khuôn mặt, sử dụng camera để thu thập dữ liệu khuôn mặt phục vụ cho nhận diện.
+-	nhandienkhuonmat.py: Chứa logic chính để thực hiện nhận diện khuôn mặt, sử dụng các thư viện như OpenCV và dlib để so sánh và xác thực khuôn mặt.
+-	gpio_setup.py: Chứa các hàm thiết lập GPIO trên Raspberry Pi, bao gồm định nghĩa các chân GPIO, bật/tắt relay, nút bấm, LED, còi báo, v.v.
+-	main.py: Tệp chính điều khiển chương trình. Đây là tệp khởi động, quản lý luồng công việc chính của hệ thống, và điều khiển toàn bộ quá trình.
+-	mokhoapass.py: Chứa logic để mở khóa cửa dựa trên mật khẩu, bao gồm việc nhập và kiểm tra mật khẩu của người dùng.
+-	send_email.py: Chứa hàm gửi email, sử dụng để gửi thông báo tới quản trị viên khi có sự cố hoặc yêu cầu mở khóa.
+-	train_model.py: Chứa logic để huấn luyện mô hình nhận diện khuôn mặt dựa trên dữ liệu hình ảnh thu thập được từ thư mục dataset/.
