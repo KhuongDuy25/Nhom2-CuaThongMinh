@@ -8,6 +8,7 @@ prevTime = 0
 doorUnlock = False
 running = True  # Biến toàn cục để kiểm soát vòng lặp
 
+
 # Thêm các biến đếm số lần nhập sai
 wrong_attempts = 0  # Biến đếm số lần nhập sai
 max_attempts = 3   # Số lần nhập sai tối đa cho phép

@@ -69,6 +69,7 @@ class LockSystemApp:
         #self.admin_button = tk.Button(self.master, text="Thêm thẻ RFID (Admin)", command=self.wirte_rfid, width=30)
         #self.admin_button.pack(pady=5)
 
+
         # Nút thoát
         self.exit_button = tk.Button(self.master, text="Thoát", command=self.exit_program, width=30)
         self.exit_button.pack(pady=5)

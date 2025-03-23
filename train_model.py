@@ -8,6 +8,7 @@ import tkinter as tk  # Thư viện GUI
 from tkinter import messagebox  # Thư viện hiển thị hộp thoại thông báo
 
 
+
 def train_face_recognition(username):
     """
     Hàm này dùng để train dữ liệu khuôn mặt của người dùng và lưu kết quả mã hóa khuôn mặt vào file pickle.

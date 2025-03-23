@@ -65,6 +65,7 @@ def SendEmail1():                                            # Gửi email cản
     sender_password = "twwutysomskshvws"
     Receiver_Email = "nguyenkhuong1052003@gmail.com"
 
+
     # Tạo nội dung email
     newMessage = EmailMessage()
     newMessage['Subject'] = "WARNING! AI ĐÓ ĐANG CỐ MỞ CỬA NHÀ BẠN BẰNG MẬT KHẨU SAI"

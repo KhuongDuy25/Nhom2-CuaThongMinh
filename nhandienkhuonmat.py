@@ -11,6 +11,7 @@ from display import *  # Nhập hàm để hiển thị thông báo vào giao di
 import threading
 from send_email import *
 
+
 unknown_count = 0
 unknown_threshold = 3  # Ngưỡng để gửi email cảnh báo
 
