@@ -34,7 +34,7 @@ def capture_image():
     return image_path  # Trả về đường dẫn ảnh
 
 
-def SendEmail():
+def SendEmail(path):                                               # Gửi email cảnh báo và đính kèm ảnh
     """Gửi email cảnh báo và đính kèm ảnh."""
     sender_email = "khuong1052k25@gmail.com"
     sender_password = "twwutysomskshvws"
@@ -42,13 +42,13 @@ def SendEmail():
 
     # Tạo nội dung email
     newMessage = EmailMessage()
-    newMessage['Subject'] = "CẢNH BÁO !!!"
+    newMessage['Subject'] = "WARNING! AI ĐÓ ĐANG CỐ MỞ CỬA NHÀ BẠN BẰNG KHUÔN MẶT"
     newMessage['From'] = sender_email
     newMessage['To'] = Receiver_Email
     newMessage.set_content('Cảnh báo: Đã có người nhập sai mật khẩu nhiều lần!')
 
-    # Đính kèm ảnh nếu có
-    image_path = capture_image()  # Chụp ảnh từ camera
+    # Đính kèm ảnh vào email
+    image_path = path  # Chụp ảnh từ camera
     if image_path:
         with open(image_path, 'rb') as f:
             image_data = f.read()
@@ -58,8 +58,8 @@ def SendEmail():
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(sender_email, sender_password)
         smtp.send_message(newMessage)
-
-def SendEmail1(path):
+        
+def SendEmail1():                                            # Gửi email cảnh báo về sai mật khẩu
     """Gửi email cảnh báo và đính kèm ảnh."""
     sender_email = "khuong1052k25@gmail.com"
     sender_password = "twwutysomskshvws"
@@ -67,17 +67,10 @@ def SendEmail1(path):
 
     # Tạo nội dung email
     newMessage = EmailMessage()
-    newMessage['Subject'] = "CẢNH BÁO !!!"
+    newMessage['Subject'] = "WARNING! AI ĐÓ ĐANG CỐ MỞ CỬA NHÀ BẠN BẰNG MẬT KHẨU SAI"
     newMessage['From'] = sender_email
     newMessage['To'] = Receiver_Email
-    newMessage.set_content('Cảnh báo: Có người lạ cố gắng mở cửa nhà bạn')
-
-    # Đính kèm ảnh nếu có
-    image_path = path  # Chụp ảnh từ camera
-    if image_path:
-        with open(image_path, 'rb') as f:
-            image_data = f.read()
-            newMessage.add_attachment(image_data, maintype='image', subtype='jpeg', filename=os.path.basename(image_path))
+    newMessage.set_content('Có ai đó đang cố gắng mở cửa nhà bạn')
 
     # Gửi email qua máy chủ Gmail
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:

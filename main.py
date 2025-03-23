@@ -1,10 +1,10 @@
 import tkinter as tk  # Thư viện GUI cho Python
 from tkinter import messagebox  # Hộp thoại thông báo
-from face_recognition import load_known_faces, unlock_with_face  # Thư viện nhận diện khuôn mặt
-from password_unlock import password_entry_system  # Thư viện mở khóa bằng mật khẩu
-from rfid_simulation import simulate_rfid_input  # Thư viện mô phỏng đầu vào RFID
-from admin_functions import admin_password  # Thư viện chức năng quản trị
-from wirte_rfid import wirte_rfid  # Thư viện để thêm thẻ RFID
+from nhandienkhuonmat import load_known_faces, unlock_with_face  # Thư viện nhận diện khuôn mặt
+from mokhoapass import password_entry_system  # Thư viện mở khóa bằng mật khẩu
+#from the_rifd import simulate_rfid_input  # Thư viện mô phỏng đầu vào RFID
+from admin import admin_password  # Thư viện chức năng quản trị
+#from wirte_rfid import wirte_rfid  # Thư viện để thêm thẻ RFID
 from gpio_setup import gpio_setup, cleanup  # Thư viện để thiết lập GPIO
 from display import DisplayScreen  # Thư viện để hiển thị thông báo
 import sys  # Thư viện để quản lý hệ thống
@@ -20,7 +20,7 @@ class LockSystemApp:
         self.master = master  # Cửa sổ chính
         self.master.title("Lock System")  # Tiêu đề của cửa sổ
         self.master.geometry("300x300")  # Kích thước cửa sổ
-        self.idle_time_limit = 15000  # Thời gian tối đa không hoạt động (15 giây)
+        self.idle_time_limit = 150000  # Thời gian tối đa không hoạt động (15 giây)
         self.idle_event = None  # Biến để lưu sự kiện hẹn giờ
         self.check()
         # Tạo các widget trong menu chính
@@ -50,7 +50,7 @@ class LockSystemApp:
         self.label.pack(pady=10)
 
         # Nút mở khóa bằng khuôn mặt
-        self.face_button = tk.Button(self.master, text="Mở khóa bằng khuôn mặt", command=self.unlock_with_face, width=30)
+        self.face_button = tk.Button(self.master, text="Mở khóa khuôn mặt", command=self.unlock_with_face, width=30)
         self.face_button.pack(pady=5)
 
         # Nút mở khóa bằng mật khẩu
@@ -58,16 +58,16 @@ class LockSystemApp:
         self.password_button.pack(pady=5)
 
         # Nút mô phỏng đầu vào RFID
-        self.rfid_button = tk.Button(self.master, text="Mô phỏng đầu vào RFID", command=self.simulate_rfid_input, width=30)
-        self.rfid_button.pack(pady=5)
+        #self.rfid_button = tk.Button(self.master, text="Mô phỏng đầu vào RFID", command=self.simulate_rfid_input, width=30)
+        #self.rfid_button.pack(pady=5)
 
         # Nút thêm khuôn mặt (Admin)
         self.admin_button = tk.Button(self.master, text="Thêm khuôn mặt (Admin)", command=self.admin_password, width=30)
         self.admin_button.pack(pady=5)
         
         # Nút thêm thẻ RFID (Admin)
-        self.admin_button = tk.Button(self.master, text="Thêm thẻ RFID (Admin)", command=self.wirte_rfid, width=30)
-        self.admin_button.pack(pady=5)
+        #self.admin_button = tk.Button(self.master, text="Thêm thẻ RFID (Admin)", command=self.wirte_rfid, width=30)
+        #self.admin_button.pack(pady=5)
 
         # Nút thoát
         self.exit_button = tk.Button(self.master, text="Thoát", command=self.exit_program, width=30)
@@ -77,8 +77,9 @@ class LockSystemApp:
         """Mở khóa bằng nhận diện khuôn mặt."""
         self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
         self.hide_menu()  # Ẩn cửa sổ chính
-        data = load_known_faces()  # Tải các khuôn mặt đã biết
-        unlock_with_face(data)  # Thực hiện mở khóa
+        data = load_known_faces()  # Tải các khuôn mặt đã biết gọi hàm ở file   face_recognition.py
+        # Call face recognition and check return value
+        success = unlock_with_face(data)
         self.show_menu()  # Hiển thị lại menu
         self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
 
@@ -86,17 +87,17 @@ class LockSystemApp:
         """Gọi hệ thống nhập mật khẩu."""
         self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
         self.hide_menu()  # Ẩn cửa sổ chính
-        password_entry_system()  # Gọi hàm nhập mật khẩu
+        password_entry_system()  # Gọi hàm xử lý nhập mật khẩu ở file     password_unlock.py
         self.show_menu()  # Hiển thị lại menu
         self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
 
-    def simulate_rfid_input(self):
-        """Mô phỏng đầu vào RFID."""
-        self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
-        self.hide_menu()  # Ẩn cửa sổ chính
-        simulate_rfid_input()  # Gọi hàm mô phỏng RFID
-        self.show_menu()  # Hiển thị lại menu
-        self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
+    # def simulate_rfid_input(self):    mô phỏng đầu vào RFID
+    #     """Mô phỏng đầu vào RFID."""
+    #     self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
+    #     self.hide_menu()  # Ẩn cửa sổ chính
+    #     simulate_rfid_input()  # Gọi hàm xử lý mô phỏng RFID ở file rfid_simulation.py
+    #     self.show_menu()  # Hiển thị lại menu
+    #     self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
 
     def admin_password(self):
         """Chạy chức năng mật khẩu admin."""
@@ -106,13 +107,13 @@ class LockSystemApp:
         self.show_menu()  # Hiển thị lại menu
         self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
 
-    def wirte_rfid(self):
-        """Chạy chức năng thêm thẻ RFID."""
-        self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
-        self.hide_menu()  # Ẩn cửa sổ chính
-        wirte_rfid()  # Gọi hàm thêm thẻ RFID
-        self.show_menu()  # Hiển thị lại menu
-        self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
+    # def wirte_rfid(self):     thêm thẻ RFID
+    #     """Chạy chức năng thêm thẻ RFID."""
+    #     self.stop_idle_timer()  # Dừng hẹn giờ không hoạt động
+    #     self.hide_menu()  # Ẩn cửa sổ chính
+    #     wirte_rfid()  # Gọi hàm thêm thẻ RFID ở file wirte_rfid.py
+    #     self.show_menu()  # Hiển thị lại menu
+    #     self.reset_idle_timer()  # Reset hẹn giờ không hoạt động
 
     def hide_menu(self):
         """Ẩn menu chính và xóa thông báo."""

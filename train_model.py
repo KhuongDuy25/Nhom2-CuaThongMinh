@@ -7,6 +7,7 @@ from display import DisplayScreen  # Thư viện hiển thị thông báo
 import tkinter as tk  # Thư viện GUI
 from tkinter import messagebox  # Thư viện hiển thị hộp thoại thông báo
 
+
 def train_face_recognition(username):
     """
     Hàm này dùng để train dữ liệu khuôn mặt của người dùng và lưu kết quả mã hóa khuôn mặt vào file pickle.
@@ -15,10 +16,10 @@ def train_face_recognition(username):
     username (str): Tên của người dùng sẽ được sử dụng để train model nhận diện khuôn mặt.
     """
     display = DisplayScreen()  # Khởi tạo đối tượng để hiển thị thông báo
-    display.add_message("Bắt đầu train dữ liệu")  # Thông báo bắt đầu quá trình train
+    display.add_message("Đang đăng kí khuôn mặt")  # Thông báo bắt đầu quá trình train
 
     # Khởi tạo bộ phát hiện khuôn mặt và encoder của dlib
-    detector = dlib.get_frontal_face_detector()  # Bộ phát hiện khuôn mặt
+    detector = dlib.get_frontal_face_detector()   # Bộ phát hiện khuôn mặt
     sp = dlib.shape_predictor("Model/shape_predictor_68_face_landmarks.dat")  # Tải mô hình landmarks để xác định các điểm trên khuôn mặt
     face_encoder = dlib.face_recognition_model_v1("Model/dlib_face_recognition_resnet_model_v1.dat")  # Tải mô hình nhận diện khuôn mặt
 

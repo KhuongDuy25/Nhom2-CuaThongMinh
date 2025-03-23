@@ -6,18 +6,17 @@ import pygame  # Nhập thư viện pygame để xử lý âm thanh
 # Định nghĩa các chân GPIO
 RELAY_PIN = 17  # Sử dụng chân GPIO 17 cho relay
 BUTTON_PIN = 27  # Nút bấm mở cửa
-SCAN_STATUS_PIN = 18  # Chân để hiển thị trạng thái quét thẻ
 DOOR_STATUS_PIN = 15  # Chân để hiển thị trạng thái cửa mở
 ALARM_PIN = 22  # Sử dụng chân GPIO 22 cho còi báo động
-UNLOCK_PIN=23
+UNLOCK_PIN=23   # Nút bấm khóa cửa
 door_open = False  # Trạng thái của cửa (đã mở hay chưa)
 unlock = False  # Trạng thái mở khóa
 prevTime1 = 0  # Thời gian cuối cùng trạng thái cửa thay đổi
 pygame.mixer.init()  # Khởi động pygame mixer để phát âm thanh
 khoa = True
 # Nạp file âm thanh
-correct_alarm_sound = pygame.mixer.Sound("Sound/beep-06.wav")  # Âm thanh cho mở khóa đúng
-incorrect_alarm_sound = pygame.mixer.Sound("Sound/beep-03.wav")  # Âm thanh cho mở khóa sai
+correct_alarm_sound = pygame.mixer.Sound("Sound/Correct.mp3")  # Âm thanh cho mở khóa đúng
+incorrect_alarm_sound = pygame.mixer.Sound("Sound/Incorrect.mp3")  # Âm thanh cho mở khóa sai
 
 # Thiết lập GPIO
 def gpio_setup():
@@ -25,8 +24,8 @@ def gpio_setup():
     GPIO.setmode(GPIO.BCM)  # Sử dụng chế độ chân BCM
     GPIO.setup(RELAY_PIN, GPIO.OUT)  # Thiết lập chân relay là đầu ra
     GPIO.output(RELAY_PIN, GPIO.LOW)  # Khởi động relay ở trạng thái LOW
-    GPIO.setup(SCAN_STATUS_PIN, GPIO.OUT)  # Thiết lập chân quét thẻ là đầu ra
-    GPIO.output(SCAN_STATUS_PIN, GPIO.LOW)  # Ban đầu, trạng thái quét thẻ là không hoạt động (LOW)
+    # GPIO.setup(SCAN_STATUS_PIN, GPIO.OUT)  # Thiết lập chân quét thẻ là đầu ra
+    # GPIO.output(SCAN_STATUS_PIN, GPIO.LOW)  # Ban đầu, trạng thái quét thẻ là không hoạt động (LOW)
     GPIO.setup(DOOR_STATUS_PIN, GPIO.OUT)  # Thiết lập chân trạng thái cửa là đầu ra
     GPIO.output(DOOR_STATUS_PIN, GPIO.LOW)  # Ban đầu, trạng thái cửa là đóng
     GPIO.setup(ALARM_PIN, GPIO.OUT)  # Thiết lập chân alarm
@@ -89,18 +88,15 @@ def lock_door():
 def activate_correct_alarm():
     GPIO.output(ALARM_PIN, GPIO.HIGH)  # Bật còi báo động
     correct_alarm_sound.play()  # Phát âm thanh đúng
-    show_message("Âm thanh đúng: Cửa đã được mở.")  # Hiển thị thông báo chỉ báo âm thanh đúng đã được bật
 
 # Kích hoạt âm thanh sai
 def activate_incorrect_alarm():
     GPIO.output(ALARM_PIN, GPIO.HIGH)  # Bật còi báo động
     incorrect_alarm_sound.play()  # Phát âm thanh sai
-    show_message("Âm thanh sai: Truy cập không hợp lệ!")  # Hiển thị thông báo chỉ báo âm thanh sai đã được bật
 
 # Hàm tắt còi báo động
 def deactivate_alarm():
     GPIO.output(ALARM_PIN, GPIO.LOW)  # Tắt còi báo động
-    show_message("Cảnh báo: Âm thanh đã được tắt.")  # Hiển thị thông báo chỉ báo âm thanh đã tắt
 
 # Hàm tắt relay
 def turn_off_relay():
@@ -111,13 +107,13 @@ def cleanup():
     GPIO.cleanup()  # Làm sạch trạng thái GPIO
 
 # Hàm quét thẻ
-def start_card_scan():
-    GPIO.output(SCAN_STATUS_PIN, GPIO.HIGH)  # Bắt đầu quét thẻ
-    show_message("Đang quét thẻ...")  # Hiển thị thông báo quét thẻ
+# def start_card_scan():
+#     GPIO.output(SCAN_STATUS_PIN, GPIO.HIGH)  # Bắt đầu quét thẻ
+#     show_message("Đang quét thẻ...")  # Hiển thị thông báo quét thẻ
 
-def stop_card_scan():
-    GPIO.output(SCAN_STATUS_PIN, GPIO.LOW)  # Dừng quét thẻ
-    show_message("Kết thúc quét thẻ.")  # Hiển thị thông báo kết thúc quét thẻ
+# def stop_card_scan():
+#     GPIO.output(SCAN_STATUS_PIN, GPIO.LOW)  # Dừng quét thẻ
+#     show_message("Kết thúc quét thẻ.")  # Hiển thị thông báo kết thúc quét thẻ
 
 # Lấy trạng thái cửa và thời gian cuối cùng cửa chuyển đổi trạng thái
 def get_door_status():

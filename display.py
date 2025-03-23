@@ -10,7 +10,7 @@ class DisplayScreen:
         pygame.display.set_caption("Display Screen")  # Đặt tiêu đề cửa sổ
         
         # Thay đổi font để hỗ trợ tiếng Việt
-        self.font = pygame.font.Font("Font/font-times-new-roman.ttf", 24)  # Đường dẫn đến tệp font chữ
+        self.font = pygame.font.Font("C:/Users\KhuongDuy/Desktop/Nhom2-CuaThongMinh/Font/font-times-new-roman.ttf", 24)  # Đường dẫn đến tệp font chữ
         self.lines = []  # Danh sách các dòng để hiển thị
         self.bg_color = (0, 0, 0)  # Màu nền (đen)
         self.text_color = (0, 255, 0)  # Màu chữ (xanh lá cây)
